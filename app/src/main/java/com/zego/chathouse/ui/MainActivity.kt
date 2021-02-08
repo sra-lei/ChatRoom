@@ -28,7 +28,6 @@ class MainActivity : BaseActivity() {
     override fun finish() {
         super.finish()
 
-        ZegoExpressEngine.getEngine().setEventHandler(null)
         ZegoExpressEngine.destroyEngine(null)
     }
 }

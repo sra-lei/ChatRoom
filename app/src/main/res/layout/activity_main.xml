@@ -38,6 +38,7 @@
         android:layout_marginHorizontal="100dp"
         android:gravity="center"
         android:hint="@string/hint_please_input_room_num"
+        android:text="398767"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
