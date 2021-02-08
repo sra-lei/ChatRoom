@@ -4,7 +4,7 @@ import android.content.Context
 import android.os.Build
 import android.text.TextUtils
 import com.zego.chathouse.ChatHouseApplication
-import java.text.SimpleDateFormat
+import com.zego.chathouse.R
 import java.util.*
 
 /**
@@ -16,6 +16,19 @@ class ZegoPreferenceUtil private constructor() {
         private const val SHARE_PREFERENCE_NAME = "ZEGO_REMOTE_CHECK_VIDEO_CALL"
         private const val KEY_USER_ID = "sp_key_user_id"
         private const val KEY_USER_NAME = "sp_key_user_name"
+        private const val KEY_USER_ICON = "sp_key_user_icon"
+        private val iconList = mutableListOf(
+            R.drawable.if_aunt,
+            R.drawable.if_brother,
+            R.drawable.if_daughter,
+            R.drawable.if_father,
+            R.drawable.if_grandfather,
+            R.drawable.if_grandmother,
+            R.drawable.if_mother,
+            R.drawable.if_sister,
+            R.drawable.if_son,
+            R.drawable.if_uncle,
+        )
 
         /**
          * single instance.
@@ -46,13 +59,44 @@ class ZegoPreferenceUtil private constructor() {
     fun getUserName(): String {
         var userName: String = getStringValue(KEY_USER_NAME, "")
         if (TextUtils.isEmpty(userName)) {
-            val monthAndDay = SimpleDateFormat("MMdd", Locale.CHINA).format(Date())
-            // 以设备名称 + 时间日期 + 一位随机数  作为用户名
-            userName = Build.MODEL + monthAndDay + Random().nextInt(10)
+            // 以设备名称 + 一位随机数  作为用户名
+            userName = Build.MODEL + "-" + getUserIconIdx()
             // 保存用户名
             setStringValue(KEY_USER_NAME, userName)
         }
         return userName
+    }
+
+    fun getUserIconRes(): Int {
+        return iconList[getUserIconIdx()]
+    }
+
+    fun getUserIconRes(userName: String): Int {
+        var iconIdx = 0
+        try {
+            val strs = userName.split("-")
+            if (strs.size > 1) {
+                iconIdx = strs[1].toInt()
+            }
+        } catch (ex: Exception) {
+        }
+        return getUserIconRes(iconIdx)
+    }
+
+    private fun getUserIconRes(iconIdx: Int): Int {
+        return iconList[iconIdx]
+    }
+
+    /**
+     * 获取保存的UserName，如果没有，则新建
+     */
+    private fun getUserIconIdx(): Int {
+        var userIconIdx = getIntValue(KEY_USER_ICON, 0)
+        if (0 == userIconIdx) {
+            userIconIdx = Random().nextInt(iconList.size)
+            setIntValue(KEY_USER_ICON, userIconIdx)
+        }
+        return userIconIdx
     }
 
     fun setStringValue(key: String, value: String) {

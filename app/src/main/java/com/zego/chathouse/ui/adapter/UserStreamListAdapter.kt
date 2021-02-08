@@ -4,11 +4,13 @@ import android.graphics.Color
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.zego.chathouse.R
 import com.zego.chathouse.ui.adapter.UserStreamListAdapter.UserStreamViewHolder
 import com.zego.chathouse.ui.vo.ChatStreamInfo
+import com.zego.chathouse.utils.ZegoPreferenceUtil
 import im.zego.zegoexpress.entity.ZegoUser
 import java.util.*
 
@@ -20,6 +22,8 @@ class UserStreamListAdapter : BaseQuickAdapter<ChatStreamInfo, UserStreamViewHol
 
     override fun convert(holder: UserStreamViewHolder, item: ChatStreamInfo) {
         holder.userName.text = item.user.userName
+        val resId = ZegoPreferenceUtil.instance.getUserIconRes(item.user.userName)
+        holder.userIcon.setImageDrawable(ResourcesCompat.getDrawable(context.resources, resId, null))
         holder.soundLevelTextView.text = item.getSoundLevel().toString()
     }
 

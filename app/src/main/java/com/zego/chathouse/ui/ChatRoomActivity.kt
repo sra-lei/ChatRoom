@@ -103,7 +103,9 @@ class ChatRoomActivity : BaseActivity() {
         // mute microphone
         mEngine.muteMicrophone(true)
         // monitor for sound level
-        mEngine.startSoundLevelMonitor()
+        mEngine.startSoundLevelMonitor(300)
+
+        startPublish()
     }
 
     /**
@@ -160,10 +162,6 @@ class ChatRoomActivity : BaseActivity() {
                 }
             }
             runOnUiThread {
-                if (mRoomUsers.size < 50) {
-                    micOnBtn.isEnabled = true
-                    startPublish()
-                }
                 userCountText.text = getString(R.string.online_user_count, mRoomUsers.size)
             }
         }
@@ -190,9 +188,6 @@ class ChatRoomActivity : BaseActivity() {
                     }
                     mRoomStreams.removeAll(streamList)
                 }
-            }
-            if (mRoomStreams.size < 50) {
-                micOnBtn.isEnabled = true
             }
         }
 
