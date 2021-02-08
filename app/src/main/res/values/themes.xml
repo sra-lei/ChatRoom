@@ -17,6 +17,9 @@
 
     <!-- 并添加自己的 style -->
     <style name="YourStyle" parent="QMUI.RoundButton">
-        <item name="singleLine">true</item>
+        <item name="qmui_backgroundColor">@color/btn_green_gray</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
     </style>
 </resources>

@@ -44,13 +44,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.qmuiteam.qmui.layout.QMUIButton
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
         android:id="@+id/enterRoomBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="120dp"
         android:layout_marginTop="30dp"
         android:text="@string/enter_room"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/roomIdEditText" />

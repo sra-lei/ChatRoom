@@ -12,7 +12,7 @@
     <string name="enter_room">进入房间</string>
 
     <string name="chat_name">ChatHouse</string>
-    <string name="chat_comment">This is a communication about how to create a chat house by zego express!</string>
+    <string name="chat_comment">This is a communication about how to create a chat house with zego express engine!</string>
     <string name="online_user_count">在线上数：%d</string>
 
     <string name="exit_room">退出房间</string>

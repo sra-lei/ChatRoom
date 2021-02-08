@@ -26,6 +26,6 @@ public class ChatHouseApplication : Application() {
         config.advancedConfig["max_channels"] = "50"
         ZegoExpressEngine.setEngineConfig(config)
 
-        ZegoExpressEngine.createEngine(appID, appSign, true, ZegoScenario.GENERAL, this, null);
+        ZegoExpressEngine.createEngine(appID, appSign, true, ZegoScenario.COMMUNICATION, this, null);
     }
 }

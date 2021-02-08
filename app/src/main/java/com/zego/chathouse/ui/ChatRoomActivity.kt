@@ -9,9 +9,11 @@ import com.zego.chathouse.ui.adapter.UserStreamListAdapter
 import com.zego.chathouse.ui.base.BaseActivity
 import im.zego.zegoexpress.ZegoExpressEngine
 import im.zego.zegoexpress.callback.IZegoEventHandler
+import im.zego.zegoexpress.constants.ZegoAudioConfigPreset
 import im.zego.zegoexpress.constants.ZegoPlayerState
 import im.zego.zegoexpress.constants.ZegoRoomState
 import im.zego.zegoexpress.constants.ZegoUpdateType
+import im.zego.zegoexpress.entity.ZegoAudioConfig
 import im.zego.zegoexpress.entity.ZegoRoomConfig
 import im.zego.zegoexpress.entity.ZegoStream
 import im.zego.zegoexpress.entity.ZegoUser
@@ -103,11 +105,18 @@ class ChatRoomActivity : BaseActivity() {
         mEngine.loginRoom(mRoomId, mSelfUser, config)
         // mute microphone
         mEngine.muteMicrophone(true)
+        // monitor for sound level
+        mEngine.startSoundLevelMonitor()
+        // audio config
+        val audioConfig = ZegoAudioConfig(ZegoAudioConfigPreset.BASIC_QUALITY)
+        mEngine.audioConfig = audioConfig
+        // start publish
         mPublishStreamId = createStreamId()
         mEngine.startPublishingStream(mPublishStreamId)
     }
 
     override fun finish() {
+        mEngine.stopSoundLevelMonitor()
         mEngine.stopPublishingStream()
         for (stream in mRoomStreams) {
             mEngine.stopPlayingStream(stream.streamID)
