@@ -20,7 +20,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxLines="2"
-        android:padding="15dp"
+        android:paddingStart="15dp"
+        android:paddingEnd="10dp"
         android:text="@string/chat_comment"
         android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@+id/chatNameTextView" />
@@ -30,25 +31,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingHorizontal="10dp"
-        android:paddingVertical="5dp"
+        android:paddingVertical="15dp"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chatCommentTextView" />
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/refreshLayout"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/userRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="10dp"
+        android:padding="10dp"
         app:layout_constraintBottom_toTopOf="@+id/toolBoxLayout"
         app:layout_constraintTop_toBottomOf="@+id/userCountText"
-        app:layout_constraintVertical_weight="0.8">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/userRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        app:layout_constraintVertical_weight="0.8" />
 
     <LinearLayout
         android:id="@+id/toolBoxLayout"
@@ -58,7 +53,7 @@
         android:orientation="horizontal"
         android:paddingHorizontal="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/refreshLayout"
+        app:layout_constraintTop_toBottomOf="@+id/userRecyclerView"
         app:layout_constraintVertical_weight="0.2">
 
         <Button
@@ -66,6 +61,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
+            android:enabled="false"
             android:text="@string/mic_on" />
 
         <Button

@@ -4,6 +4,7 @@ import android.app.Application
 import im.zego.zegoexpress.ZegoExpressEngine
 import im.zego.zegoexpress.constants.ZegoScenario
 import im.zego.zegoexpress.entity.ZegoEngineConfig
+import java.lang.ref.WeakReference
 
 /**
  *
@@ -12,8 +13,14 @@ import im.zego.zegoexpress.entity.ZegoEngineConfig
  * description:
  */
 public class ChatHouseApplication : Application() {
+    companion object {
+        lateinit var application: WeakReference<Application>
+    }
+
     override fun onCreate() {
         super.onCreate()
+        application = WeakReference(this)
+
         initEngine()
     }
 

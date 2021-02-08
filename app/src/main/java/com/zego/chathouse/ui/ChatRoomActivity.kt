@@ -7,6 +7,7 @@ import com.zego.chathouse.R
 import com.zego.chathouse.constants.ZegoConstant
 import com.zego.chathouse.ui.adapter.UserStreamListAdapter
 import com.zego.chathouse.ui.base.BaseActivity
+import com.zego.chathouse.utils.ZegoPreferenceUtil
 import im.zego.zegoexpress.ZegoExpressEngine
 import im.zego.zegoexpress.callback.IZegoEventHandler
 import im.zego.zegoexpress.constants.ZegoAudioConfigPreset
@@ -75,10 +76,6 @@ class ChatRoomActivity : BaseActivity() {
         userRecyclerView.itemAnimator = DefaultItemAnimator()
         userRecyclerView.adapter = mAdapter
 
-        refreshLayout.setOnRefreshListener {
-
-        }
-
         micOnBtn.setOnClickListener {
             if (mEngine.isMicrophoneMuted) {
                 mEngine.muteMicrophone(false)
@@ -107,6 +104,12 @@ class ChatRoomActivity : BaseActivity() {
         mEngine.muteMicrophone(true)
         // monitor for sound level
         mEngine.startSoundLevelMonitor()
+    }
+
+    /**
+     *
+     */
+    private fun startPublish() {
         // audio config
         val audioConfig = ZegoAudioConfig(ZegoAudioConfigPreset.BASIC_QUALITY)
         mEngine.audioConfig = audioConfig
@@ -135,9 +138,6 @@ class ChatRoomActivity : BaseActivity() {
                 }
                 ZegoRoomState.CONNECTED == state -> {
                     AnkoLogger(TAG).debug { "login complete." }
-                    for (i in 0..10) {
-                        mAdapter.addData(createUser())
-                    }
                 }
                 ZegoRoomState.DISCONNECTED == state -> {
                     toast("disconnect from room.")
@@ -150,17 +150,29 @@ class ChatRoomActivity : BaseActivity() {
             when {
                 ZegoUpdateType.ADD == updateType -> {
                     mRoomUsers.addAll(userList)
+                    mAdapter.addData(userList)
                 }
                 ZegoUpdateType.DELETE == updateType -> {
                     mRoomUsers.removeAll(userList)
+                    for (zegoUser in userList) {
+                        mAdapter.remove(zegoUser)
+                    }
                 }
             }
-            userCountText.text = getString(R.string.online_user_count, mRoomUsers.size)
+            runOnUiThread {
+                if (mRoomUsers.size < 50) {
+                    micOnBtn.isEnabled = true
+                    startPublish()
+                }
+                userCountText.text = getString(R.string.online_user_count, mRoomUsers.size)
+            }
         }
 
         override fun onRoomOnlineUserCountUpdate(roomID: String?, count: Int) {
             super.onRoomOnlineUserCountUpdate(roomID, count)
-            userCountText.text = getString(R.string.online_user_count, count)
+            runOnUiThread {
+                userCountText.text = getString(R.string.online_user_count, count)
+            }
         }
 
         override fun onRoomStreamUpdate(roomID: String?, updateType: ZegoUpdateType, streamList: ArrayList<ZegoStream>, extendedData: JSONObject?) {
@@ -179,6 +191,9 @@ class ChatRoomActivity : BaseActivity() {
                     mRoomStreams.removeAll(streamList)
                 }
             }
+            if (mRoomStreams.size < 50) {
+                micOnBtn.isEnabled = true
+            }
         }
 
         override fun onPlayerStateUpdate(streamID: String?, state: ZegoPlayerState?, errorCode: Int, extendedData: JSONObject?) {
@@ -190,17 +205,20 @@ class ChatRoomActivity : BaseActivity() {
 
         override fun onCapturedSoundLevelUpdate(soundLevel: Float) {
             super.onCapturedSoundLevelUpdate(soundLevel)
-            captureSoundLevelTxt.text = soundLevel.toString()
+            runOnUiThread {
+                captureSoundLevelTxt.text = soundLevel.toString()
+            }
         }
 
-        override fun onRemoteSoundLevelUpdate(soundLevels: HashMap<String, Float>?) {
+        override fun onRemoteSoundLevelUpdate(soundLevels: HashMap<String, Float>) {
             super.onRemoteSoundLevelUpdate(soundLevels)
+            mAdapter.update(soundLevels)
         }
     }
 
     private fun createUser(): ZegoUser {
-        val userId = "User-${System.currentTimeMillis()}"
-        val userName = "UserName-${System.currentTimeMillis()}"
+        val userId = ZegoPreferenceUtil.instance.getUserID()
+        val userName = ZegoPreferenceUtil.instance.getUserName()
         return ZegoUser(userId, userName)
     }
 

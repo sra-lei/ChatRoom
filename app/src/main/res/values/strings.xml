@@ -18,4 +18,5 @@
     <string name="exit_room">退出房间</string>
     <string name="mic_on">上麦</string>
     <string name="mic_off">下麦</string>
+    <string name="self">ME</string>
 </resources>
