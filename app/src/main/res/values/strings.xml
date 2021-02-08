@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name" translatable="false">ChatHouse</string>
+
+    <string name="tx_has_no_permission" translatable="false">请同意权限申请</string>
+    <string name="tx_ok" translatable="false">好</string>
+    <string name="tx_quit" translatable="false">退出</string>
+
+    <string name="tx_network_disconnect" translatable="false">无网络连接</string>
+
+    <string name="zego">ZEGO</string>
+    <string name="hint_please_input_room_num">请输入房间号</string>
+    <string name="enter_room">进入房间</string>
+</resources>
