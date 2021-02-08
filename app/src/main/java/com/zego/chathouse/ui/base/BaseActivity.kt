@@ -8,6 +8,7 @@ import com.permissionx.guolindev.PermissionX
 import com.permissionx.guolindev.request.ExplainScope
 import com.zego.chathouse.R
 import com.zego.chathouse.utils.ZegoNetUtils
+import org.jetbrains.anko.toast
 
 abstract class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,14 +27,11 @@ abstract class BaseActivity : AppCompatActivity() {
             }
             .request { allGranted: Boolean, _: List<String?>?, _: List<String?>? ->
                 if (!allGranted) {
-                    Toast.makeText(
-                        this@BaseActivity,
-                        getString(R.string.tx_has_no_permission),
-                        Toast.LENGTH_LONG
-                    ).show()
+                    toast(getString(R.string.tx_has_no_permission))
                     finish()
                 }
             }
+
         if (!ZegoNetUtils.isNetConnect(this)) {
             Toast.makeText(this, R.string.tx_network_disconnect, Toast.LENGTH_LONG).show()
         }
