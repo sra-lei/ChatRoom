@@ -2,17 +2,17 @@
 <resources>
     <string name="app_name">ChatHouse</string>
     <string name="tx_has_no_permission">Please agree with the right to apply</string>
-    <string name="tx_ok">it is good</string>
-    <string name="tx_quit">drop out</string>
+    <string name="tx_ok">OK</string>
+    <string name="tx_quit">Leave</string>
     <string name="tx_network_disconnect">No network connection</string>
     <string name="zego">Zego</string>
     <string name="hint_please_input_room_num">Please enter the room number</string>
-    <string name="guest">I am a guest</string>
-    <string name="audience">I am the audience.</string>
-    <string name="enter_room">Enter the room</string>
+    <string name="guest">I am honoured guest</string>
+    <string name="audience">I am the audience</string>
+    <string name="enter_room">Enter the room number</string>
     <string name="chat_name">Chathouse</string>
     <string name="chat_comment">This is a communication about how to create a chat house with zego express engine!</string>
-    <string name="online_user_count">Online number:% D</string>
+    <string name="online_user_count">Online number: %d</string>
     <string name="exit_room">Exit the room</string>
     <string name="mic_on">MicOn</string>
     <string name="mic_off">MicOff</string>

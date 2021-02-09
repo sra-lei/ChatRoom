@@ -6,8 +6,8 @@
 
     <ImageView
         android:id="@+id/userIconImg"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
         android:src="@drawable/if_aunt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -8,6 +8,7 @@ import com.zego.chathouse.constants.ZegoConstant
 import com.zego.chathouse.ui.base.BaseActivity
 import im.zego.zegoexpress.ZegoExpressEngine
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.toast
 
 class MainActivity : BaseActivity() {
     private var roleType = 0
@@ -30,6 +31,7 @@ class MainActivity : BaseActivity() {
         enterRoomBtn.setOnClickListener {
             val roomId = roomIdEditText.text.toString()
             if (TextUtils.isEmpty(roomId)) {
+                toast(R.string.hint_please_input_room_num)
                 return@setOnClickListener
             }
             val intent = Intent(this@MainActivity, ChatRoomActivity::class.java)
