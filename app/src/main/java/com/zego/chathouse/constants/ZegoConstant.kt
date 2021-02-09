@@ -8,4 +8,5 @@ package com.zego.chathouse.constants
  */
 object ZegoConstant {
     const val ROOM_ID  = "roomId"
+    const val ROLE_TYPE  = "roleType"
 }

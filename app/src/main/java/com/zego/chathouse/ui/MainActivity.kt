@@ -10,9 +10,22 @@ import im.zego.zegoexpress.ZegoExpressEngine
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
+    private var roleType = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        roleRadioGroup.setOnCheckedChangeListener { _, checkedId ->
+            when (checkedId) {
+                R.id.guestRadioBtn -> {
+                    roleType = 0
+                }
+                R.id.audienceRadioBtn -> {
+                    roleType = 1
+                }
+            }
+        }
 
         enterRoomBtn.setOnClickListener {
             val roomId = roomIdEditText.text.toString()
@@ -21,6 +34,7 @@ class MainActivity : BaseActivity() {
             }
             val intent = Intent(this@MainActivity, ChatRoomActivity::class.java)
             intent.putExtra(ZegoConstant.ROOM_ID, roomId)
+            intent.putExtra(ZegoConstant.ROLE_TYPE, roleType)
             startActivity(intent)
         }
     }

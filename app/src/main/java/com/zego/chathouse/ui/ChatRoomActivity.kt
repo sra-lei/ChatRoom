@@ -1,6 +1,7 @@
 package com.zego.chathouse.ui
 
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import com.zego.chathouse.R
@@ -44,6 +45,9 @@ class ChatRoomActivity : BaseActivity() {
 
     // current room Id
     private var mRoomId: String? = ""
+
+    //  role type
+    private var mRoleType: Int = 0
 
     // self
     private val mSelfUser = createUser()
@@ -105,11 +109,17 @@ class ChatRoomActivity : BaseActivity() {
         // monitor for sound level
         mEngine.startSoundLevelMonitor(300)
 
-        startPublish()
+        mRoleType = intent.getIntExtra(ZegoConstant.ROLE_TYPE, 0)
+        if (mRoleType == 0) {
+            startPublish()
+            toolBoxLayout.visibility = View.VISIBLE
+        } else {
+            toolBoxLayout.visibility = View.GONE
+        }
     }
 
     /**
-     *
+     * start publish
      */
     private fun startPublish() {
         // audio config
@@ -162,7 +172,7 @@ class ChatRoomActivity : BaseActivity() {
                 }
             }
             runOnUiThread {
-                userCountText.text = getString(R.string.online_user_count, mRoomUsers.size)
+                userCountText.text = getString(R.string.online_user_count, mRoomUsers.size + 1)
             }
         }
 

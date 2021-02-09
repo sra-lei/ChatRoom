@@ -44,6 +44,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <RadioGroup
+        android:id="@+id/roleRadioGroup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="@+id/enterRoomBtn"
+        app:layout_constraintStart_toStartOf="@+id/enterRoomBtn"
+        app:layout_constraintTop_toBottomOf="@+id/roomIdEditText">
+
+        <RadioButton
+            android:id="@+id/guestRadioBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/guest" />
+
+        <RadioButton
+            android:id="@+id/audienceRadioBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/audience" />
+    </RadioGroup>
+
     <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
         android:id="@+id/enterRoomBtn"
         android:layout_width="match_parent"
@@ -54,6 +78,6 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/roomIdEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/roleRadioGroup" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

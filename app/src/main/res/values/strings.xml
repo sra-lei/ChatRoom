@@ -9,6 +9,8 @@
 
     <string name="zego">ZEGO</string>
     <string name="hint_please_input_room_num">请输入房间号</string>
+    <string name="guest">我是嘉宾</string>
+    <string name="audience">我是观众</string>
     <string name="enter_room">进入房间</string>
 
     <string name="chat_name">ChatHouse</string>
@@ -19,4 +21,5 @@
     <string name="mic_on">上麦</string>
     <string name="mic_off">下麦</string>
     <string name="self">ME</string>
+
 </resources>
