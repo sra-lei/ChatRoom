@@ -21,7 +21,11 @@ class UserStreamListAdapter : BaseQuickAdapter<ChatStreamInfo, UserStreamViewHol
         holder.userName.text = item.userName
         val resId = ZegoPreferenceUtil.instance.getUserIconRes(item.userName)
         holder.userIcon.setImageDrawable(ResourcesCompat.getDrawable(context.resources, resId, null))
-        holder.soundLevelTextView.text = item.soundLevel.toString()
+        if (item.soundLevel > 10) {
+            holder.soundLevelTextView.setImageDrawable(ResourcesCompat.getDrawable(context.resources, R.drawable.icon_remote_on, null))
+        } else {
+            holder.soundLevelTextView.setImageDrawable(ResourcesCompat.getDrawable(context.resources, R.drawable.icon_remote_off, null))
+        }
     }
 
     fun addZegoStreams(streamList: List<ZegoStream>) {
@@ -59,6 +63,6 @@ class UserStreamListAdapter : BaseQuickAdapter<ChatStreamInfo, UserStreamViewHol
     class UserStreamViewHolder internal constructor(itemView: View) : BaseViewHolder(itemView) {
         var userIcon: ImageView = itemView.findViewById(R.id.userIconImg)
         var userName: TextView = itemView.findViewById(R.id.userNameTextView)
-        var soundLevelTextView: TextView = itemView.findViewById(R.id.soundLevelTextView)
+        var soundLevelTextView: ImageView = itemView.findViewById(R.id.soundLevelFlagImg)
     }
 }

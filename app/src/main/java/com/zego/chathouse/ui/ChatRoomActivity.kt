@@ -114,6 +114,7 @@ class ChatRoomActivity : BaseActivity() {
             startPublish()
             toolBoxLayout.visibility = View.VISIBLE
         } else {
+            captureSoundLevelImg.visibility = View.GONE
             toolBoxLayout.visibility = View.GONE
         }
     }
@@ -208,8 +209,15 @@ class ChatRoomActivity : BaseActivity() {
 
         override fun onCapturedSoundLevelUpdate(soundLevel: Float) {
             super.onCapturedSoundLevelUpdate(soundLevel)
+            if (0 != mRoleType) {
+                return
+            }
             runOnUiThread {
-                captureSoundLevelTxt.text = soundLevel.toString()
+                if (soundLevel > 10) {
+                    captureSoundLevelImg.visibility = View.VISIBLE
+                } else {
+                    captureSoundLevelImg.visibility = View.GONE
+                }
             }
         }
 

@@ -80,13 +80,14 @@
             android:text="@string/exit_room" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/captureSoundLevelTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/captureSoundLevelImg"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
         android:layout_marginBottom="5dp"
-        android:text="33"
-        android:textColor="@android:color/holo_green_dark"
+        android:scaleType="fitXY"
+        android:src="@drawable/icon_mic_on"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolBoxLayout" />
