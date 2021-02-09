@@ -1,25 +1,19 @@
 <resources>
     <string name="app_name">ChatHouse</string>
-
     <string name="tx_has_no_permission">请同意权限申请</string>
     <string name="tx_ok">好</string>
     <string name="tx_quit">退出</string>
-
     <string name="tx_network_disconnect">无网络连接</string>
-
     <string name="zego">ZEGO</string>
     <string name="hint_please_input_room_num">请输入房间号</string>
     <string name="guest">我是嘉宾</string>
     <string name="audience">我是观众</string>
     <string name="enter_room">进入房间</string>
-
     <string name="chat_name">ChatHouse</string>
     <string name="chat_comment">This is a communication about how to create a chat house with zego express engine!</string>
     <string name="online_user_count">在线上数：%d</string>
-
     <string name="exit_room">退出房间</string>
     <string name="mic_on">上麦</string>
     <string name="mic_off">下麦</string>
-    <string name="self">ME</string>
-
+    <string name="self">我</string>
 </resources>
