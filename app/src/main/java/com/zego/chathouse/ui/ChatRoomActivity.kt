@@ -26,6 +26,7 @@ import org.jetbrains.anko.toast
 import org.json.JSONObject
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 /**
  * ChatRoom
@@ -56,7 +57,7 @@ class ChatRoomActivity : BaseActivity() {
     private var mPublishStreamId: String = ""
 
     // cur users in room
-    private val mRoomUsers = ArrayList<ZegoUser>()
+    private val mRoomUsers = HashMap<String, ZegoUser>()
 
     // cur streams in room
     private val mRoomStreams = ArrayList<ZegoStream>()
@@ -162,22 +163,22 @@ class ChatRoomActivity : BaseActivity() {
             super.onRoomUserUpdate(roomID, updateType, userList)
             when {
                 ZegoUpdateType.ADD == updateType -> {
-                    mRoomUsers.addAll(userList)
+                    for (zegoUser in userList) {
+                        mRoomUsers[zegoUser.userID] = zegoUser
+                    }
                 }
                 ZegoUpdateType.DELETE == updateType -> {
-                    mRoomUsers.removeAll(userList)
+                    for (zegoUser in userList) {
+                        mRoomUsers.remove(zegoUser.userID)
+                    }
                 }
             }
-            runOnUiThread {
-                userCountText.text = getString(R.string.online_user_count, mRoomUsers.size + 1)
-            }
+            userCountText.text = getString(R.string.online_user_count, mRoomUsers.size + 1)
         }
 
         override fun onRoomOnlineUserCountUpdate(roomID: String?, count: Int) {
             super.onRoomOnlineUserCountUpdate(roomID, count)
-            runOnUiThread {
-                userCountText.text = getString(R.string.online_user_count, count)
-            }
+            userCountText.text = getString(R.string.online_user_count, count)
         }
 
         override fun onRoomStreamUpdate(roomID: String?, updateType: ZegoUpdateType, streamList: ArrayList<ZegoStream>, extendedData: JSONObject?) {
