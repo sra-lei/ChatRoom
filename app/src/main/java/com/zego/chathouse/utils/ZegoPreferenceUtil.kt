@@ -72,15 +72,12 @@ class ZegoPreferenceUtil private constructor() {
     }
 
     fun getUserIconRes(userName: String): Int {
-        var iconIdx = 0
         try {
-            val strs = userName.split("-")
-            if (strs.size > 1) {
-                iconIdx = strs[1].toInt()
-            }
+            val iconIdx = userName.split("-").last().toInt()
+            return getUserIconRes(iconIdx)
         } catch (ex: Exception) {
         }
-        return getUserIconRes(iconIdx)
+        return 0
     }
 
     private fun getUserIconRes(iconIdx: Int): Int {

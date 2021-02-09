@@ -1,6 +1,5 @@
 package com.zego.chathouse.ui.adapter
 
-import android.graphics.Color
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -11,45 +10,47 @@ import com.zego.chathouse.R
 import com.zego.chathouse.ui.adapter.UserStreamListAdapter.UserStreamViewHolder
 import com.zego.chathouse.ui.vo.ChatStreamInfo
 import com.zego.chathouse.utils.ZegoPreferenceUtil
-import im.zego.zegoexpress.entity.ZegoUser
-import java.util.*
+import im.zego.zegoexpress.entity.ZegoStream
 
 /**
  * Created by zego on 2018/2/6.
  */
 class UserStreamListAdapter : BaseQuickAdapter<ChatStreamInfo, UserStreamViewHolder>(R.layout.item_user_stream, mutableListOf()) {
-    private val highlightColor = Color.parseColor("#1266FF")
 
     override fun convert(holder: UserStreamViewHolder, item: ChatStreamInfo) {
-        holder.userName.text = item.user.userName
-        val resId = ZegoPreferenceUtil.instance.getUserIconRes(item.user.userName)
+        holder.userName.text = item.userName
+        val resId = ZegoPreferenceUtil.instance.getUserIconRes(item.userName)
         holder.userIcon.setImageDrawable(ResourcesCompat.getDrawable(context.resources, resId, null))
-        holder.soundLevelTextView.text = item.getSoundLevel().toString()
+        holder.soundLevelTextView.text = item.soundLevel.toString()
     }
 
-    fun addData(zegoUsers: List<ZegoUser>) {
-        for (zegoUser in zegoUsers) {
-            this.addData(ChatStreamInfo(zegoUser))
+    fun addZegoStreams(streamList: List<ZegoStream>) {
+        for (zegoStream in streamList) {
+            this.addData(ChatStreamInfo(zegoStream))
         }
     }
 
-    fun remove(zegoUser: ZegoUser) {
-        var removed: ChatStreamInfo? = null
-        for (chatStreamInfo in data) {
-            if (chatStreamInfo.user.userID == zegoUser.userID) {
-                removed = chatStreamInfo
-                break
+    private fun getItem(streamId: String): ChatStreamInfo? {
+        for (streamInfo in data) {
+            if (streamInfo.streamID == streamId) {
+                return streamInfo
             }
         }
-        removed?.let {
-            this.remove(it)
+        return null
+    }
+
+    fun removeZegoStreams(streamList: List<ZegoStream>) {
+        for (stream in streamList) {
+            getItem(stream.streamID)?.let {
+                this.remove(it)
+            }
         }
     }
 
     fun update(soundLevels: HashMap<String, Float>) {
         for (chatStreamInfo in data) {
             soundLevels[chatStreamInfo.streamID]?.let {
-                chatStreamInfo.setSoundLevel(it)
+                chatStreamInfo.soundLevel = it
             }
         }
         notifyDataSetChanged()

@@ -162,13 +162,9 @@ class ChatRoomActivity : BaseActivity() {
             when {
                 ZegoUpdateType.ADD == updateType -> {
                     mRoomUsers.addAll(userList)
-                    mAdapter.addData(userList)
                 }
                 ZegoUpdateType.DELETE == updateType -> {
                     mRoomUsers.removeAll(userList)
-                    for (zegoUser in userList) {
-                        mAdapter.remove(zegoUser)
-                    }
                 }
             }
             runOnUiThread {
@@ -190,12 +186,14 @@ class ChatRoomActivity : BaseActivity() {
                     for (stream in streamList) {
                         mEngine.startPlayingStream(stream.streamID)
                     }
+                    mAdapter.addZegoStreams(streamList)
                     mRoomStreams.addAll(streamList)
                 }
                 ZegoUpdateType.DELETE == updateType -> {
                     for (stream in streamList) {
                         mEngine.stopPlayingStream(stream.streamID)
                     }
+                    mAdapter.removeZegoStreams(streamList)
                     mRoomStreams.removeAll(streamList)
                 }
             }

@@ -12,7 +12,7 @@ import java.lang.ref.WeakReference
  * @author luke
  * description:
  */
-public class ChatHouseApplication : Application() {
+class ChatHouseApplication : Application() {
     companion object {
         lateinit var application: WeakReference<Application>
     }

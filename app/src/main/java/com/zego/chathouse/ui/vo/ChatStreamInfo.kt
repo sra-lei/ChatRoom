@@ -1,7 +1,6 @@
 package com.zego.chathouse.ui.vo
 
 import im.zego.zegoexpress.entity.ZegoStream
-import im.zego.zegoexpress.entity.ZegoUser
 
 /**
  *
@@ -9,23 +8,17 @@ import im.zego.zegoexpress.entity.ZegoUser
  * @author luke
  * description:
  */
-data class ChatStreamInfo constructor(var isPlaying: Boolean) : ZegoStream() {
-    constructor(zegoUser: ZegoUser) : this(false) {
-        this.user = zegoUser
-    }
+class ChatStreamInfo {
+    var userID: String = ""
+    var userName: String = ""
+    var streamID: String = ""
+    var extraInfo: String = ""
+    var soundLevel = 0.0f
 
-    constructor(zegoStream: ZegoStream) : this(false) {
-        this.user = zegoStream.user
-        this.isPlaying = false
-    }
-
-    private var soundLevel = 0.0f
-
-    fun setSoundLevel(soundLevel: Float) {
-        this.soundLevel = soundLevel
-    }
-
-    fun getSoundLevel(): Float {
-        return soundLevel
+    constructor(zegoStream: ZegoStream) {
+        this.userID = zegoStream.user.userID
+        this.userName = zegoStream.user.userName
+        this.streamID = zegoStream.streamID
+        this.extraInfo = zegoStream.extraInfo
     }
 }
