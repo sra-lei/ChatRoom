@@ -52,30 +52,34 @@
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingHorizontal="20dp"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userRecyclerView"
         app:layout_constraintVertical_weight="0.2">
 
         <Button
             android:id="@+id/micOnBtn"
+            style="@style/ChatHouseBtn"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="32dp"
             android:layout_weight="0.3"
             android:text="@string/mic_on" />
 
         <Button
             android:id="@+id/micOffBtn"
+            style="@style/ChatHouseBtn"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="32dp"
+            android:layout_marginHorizontal="10dp"
             android:layout_weight="0.3"
             android:enabled="false"
             android:text="@string/mic_off" />
 
         <Button
             android:id="@+id/exitRoomBtn"
+            style="@style/ChatHouseBtn"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="32dp"
             android:layout_weight="0.3"
             android:text="@string/exit_room" />
     </LinearLayout>

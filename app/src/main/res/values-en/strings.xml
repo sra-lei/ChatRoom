@@ -5,16 +5,16 @@
     <string name="tx_ok">OK</string>
     <string name="tx_quit">Leave</string>
     <string name="tx_network_disconnect">No network connection</string>
-    <string name="zego">Zego</string>
+    <string name="zego">ZEGO</string>
     <string name="hint_please_input_room_num">Please enter the room number</string>
     <string name="guest">I am honoured guest</string>
     <string name="audience">I am the audience</string>
-    <string name="enter_room">Enter the room number</string>
+    <string name="enter_room">Enter room</string>
     <string name="chat_name">Chathouse</string>
     <string name="chat_comment">This is a communication about how to create a chat house with zego express engine!</string>
     <string name="online_user_count">Online number: %d</string>
-    <string name="exit_room">Exit the room</string>
-    <string name="mic_on">MicOn</string>
-    <string name="mic_off">MicOff</string>
+    <string name="exit_room">Exit</string>
+    <string name="mic_on">Mic On</string>
+    <string name="mic_off">Mic Off</string>
     <string name="self">ME</string>
 </resources>
