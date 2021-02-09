@@ -26,12 +26,38 @@ android {
             jniLibs.srcDirs = ['libs']
         }
     }
+    signingConfigs {
+        release {
+            storeFile file("./config/your_app_key.jks")
+            storePassword "your_keystore_password"
+            keyAlias "your_key_alias"
+            keyPassword "your_key_password"
+        }
+        debug {
+            storeFile file("./config/your_app_key.jks")
+            storePassword "your_keystore_password"
+            keyAlias "your_key_alias"
+            keyPassword "your_key_password"
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+
+            buildConfigField "String", "Chat_House_Version", "\"$getVersionCode\""
+            debuggable true
+            jniDebuggable true
+        }
+        debug {
+            signingConfig signingConfigs.debug
+            buildConfigField "String", "Chat_House_Version", "\"$getVersionCode\""
+            jniDebuggable true
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

@@ -1,4 +1,10 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+ext {
+    realeaseVersionCode = "(1001)"
+
+    getVersionCode = this.&getVersionCode
+}
+
 buildscript {
     ext.kotlin_version = "1.4.21"
     repositories {
@@ -23,4 +29,9 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+def getVersionCode() {
+    def flavorCode = "2.0"
+    return flavorCode + realeaseVersionCode
 }
