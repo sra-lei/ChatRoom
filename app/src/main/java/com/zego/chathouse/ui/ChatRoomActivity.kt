@@ -101,7 +101,9 @@ class ChatRoomActivity : BaseActivity() {
     }
 
     private fun initData() {
+        // receive room id from main activity
         mRoomId = intent.getStringExtra(ZegoConstant.ROOM_ID)
+        // login room
         val config = ZegoRoomConfig()
         config.isUserStatusNotify = true
         mEngine.loginRoom(mRoomId, mSelfUser, config)
@@ -110,11 +112,14 @@ class ChatRoomActivity : BaseActivity() {
         // monitor for sound level
         mEngine.startSoundLevelMonitor(300)
 
+        // receive role type from main activity
         mRoleType = intent.getIntExtra(ZegoConstant.ROLE_TYPE, 0)
         if (mRoleType == 0) {
+            // is honoured guest, start publish and show toolbar
             startPublish()
             toolBoxLayout.visibility = View.VISIBLE
         } else {
+            // is audience, hide tool bar.
             captureSoundLevelImg.visibility = View.GONE
             toolBoxLayout.visibility = View.GONE
         }
@@ -186,6 +191,7 @@ class ChatRoomActivity : BaseActivity() {
             when {
                 ZegoUpdateType.ADD == updateType -> {
                     for (stream in streamList) {
+                        // play stream from honoured guests
                         mEngine.startPlayingStream(stream.streamID)
                     }
                     mAdapter.addZegoStreams(streamList)

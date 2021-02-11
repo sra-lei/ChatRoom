@@ -29,21 +29,24 @@ class MainActivity : BaseActivity() {
         }
 
         enterRoomBtn.setOnClickListener {
-            val roomId = roomIdEditText.text.toString()
-            if (TextUtils.isEmpty(roomId)) {
-                toast(R.string.hint_please_input_room_num)
-                return@setOnClickListener
-            }
-            val intent = Intent(this@MainActivity, ChatRoomActivity::class.java)
-            intent.putExtra(ZegoConstant.ROOM_ID, roomId)
-            intent.putExtra(ZegoConstant.ROLE_TYPE, roleType)
-            startActivity(intent)
+            enterChatRoom()
         }
+    }
+
+    private fun enterChatRoom() {
+        val roomId = roomIdEditText.text.toString()
+        if (TextUtils.isEmpty(roomId)) {
+            toast(R.string.hint_please_input_room_num)
+            return
+        }
+        val intent = Intent(this@MainActivity, ChatRoomActivity::class.java)
+        intent.putExtra(ZegoConstant.ROOM_ID, roomId)
+        intent.putExtra(ZegoConstant.ROLE_TYPE, roleType)
+        startActivity(intent)
     }
 
     override fun finish() {
         super.finish()
-
         ZegoExpressEngine.destroyEngine(null)
     }
 }
